@@ -13,10 +13,10 @@ public class Cuenta {
     }
 
     public void ingreso(double importe) {
-        saldo += 25;
+        saldo += importe;
     }
 
     public void reintegro(double importe) {
-        saldo -= 25;
+        saldo -= importe;
     }
 }
