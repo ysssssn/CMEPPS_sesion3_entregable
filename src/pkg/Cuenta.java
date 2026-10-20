@@ -37,9 +37,11 @@ public class Cuenta {
 
     public void ingreso(double importe) {
         saldo += importe;
+        movimientos.add(new Movimiento(importe, Movimiento.Signo.H, "Ingreso"));
     }
 
     public void reintegro(double importe) {
         saldo -= importe;
+        movimientos.add(new Movimiento(importe, Movimiento.Signo.D, "Reintegro"));
     }
 }
