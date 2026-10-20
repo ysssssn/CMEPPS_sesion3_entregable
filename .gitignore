@@ -1,0 +1,16 @@
+*.class
+bin/
+
+*.log
+
+.metadata/
+.settings/
+.project
+.classpath
+.springBeans
+
+.DS_Store
+Thumbs.db
+
+.env
+.env.*
