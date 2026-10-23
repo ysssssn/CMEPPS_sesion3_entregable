@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,5 +48,34 @@ class CuentaTest {
         Movimiento m = cta.getMovimientos().get(0);
         assertEquals(25, m.getImporte(), 0.001);
         assertEquals(Movimiento.Signo.D, m.getSigno());
+    }
+
+    @Test
+    void testIngresoNegativoLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> cta.ingreso(-1));
+    }
+
+    @Test
+    void testIngresoCeroLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> cta.ingreso(0));
+    }
+
+    @Test
+    void testReintegroNegativoLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> cta.reintegro(-1));
+    }
+
+    @Test
+    void testReintegroCeroLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> cta.reintegro(0));
+    }
+
+    @Test
+    void testImporteInvalidoNoAlteraLaCuenta() {
+        assertThrows(IllegalArgumentException.class, () -> cta.ingreso(-1));
+        assertThrows(IllegalArgumentException.class, () -> cta.reintegro(-1));
+
+        assertEquals(100, cta.getSaldo(), 0.001);
+        assertEquals(0, cta.getMovimientos().size());
     }
 }
