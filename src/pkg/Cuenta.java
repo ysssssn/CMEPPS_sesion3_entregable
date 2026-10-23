@@ -40,17 +40,25 @@ public class Cuenta {
     }
 
     public void ingreso(double importe) {
+        validarImporte(importe);
         saldo += importe;
         registrarMovimiento(Movimiento.Signo.H, importe, "Ingreso");
     }
 
     public void reintegro(double importe) {
+        validarImporte(importe);
         if (!permiteReintegro(importe)) {
             registrarError(importe);
             return;
         }
         saldo -= importe;
         registrarMovimiento(Movimiento.Signo.D, importe, "Reintegro");
+    }
+
+    private void validarImporte(double importe) {
+        if (importe <= 0) {
+            throw new IllegalArgumentException("El importe debe ser mayor que cero");
+        }
     }
 
     private boolean permiteReintegro(double importe) {
