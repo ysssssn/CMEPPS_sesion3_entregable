@@ -2,6 +2,7 @@ package pkg;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Cuenta {
 
@@ -41,6 +42,12 @@ public class Cuenta {
     }
 
     public void reintegro(double importe) {
+        if (saldo - importe < -500) {
+            errores.add(String.format(Locale.ROOT,
+                    "Fondos insuficientes (saldo %.2f euros) en la cuenta %s para el reintegro de %.2f euros",
+                    saldo, numero, importe));
+            return;
+        }
         saldo -= importe;
         movimientos.add(new Movimiento(importe, Movimiento.Signo.D, "Reintegro"));
     }
